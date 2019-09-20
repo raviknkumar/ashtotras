@@ -7,13 +7,12 @@ import android.os.Handler;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private int TIME_OUT=3000;
+    private int TIME_OUT=2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
 
         new Handler().postDelayed(new Runnable() {
             @Override

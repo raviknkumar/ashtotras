@@ -5,30 +5,24 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
 public class StotraActivity extends AppCompatActivity {
 
-
-
     float f=1.25f;
     float size;
     MediaPlayer mp;
     AudioManager mAudioManager;
-    TextView dur,totdur,title;
+    TextView dur, totalDuration,title;
     int rsrcId;
     SeekBar seekbar;
     private Handler myHandler;
@@ -83,22 +77,17 @@ public class StotraActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         String stringExtra=intent.getStringExtra("text");
-      int x=intent.getIntExtra("abc",0);
+        int x=intent.getIntExtra("position",0);
 
         Resources res = getResources();
         TextView tv=(TextView)findViewById(R.id.text2);
         String[] ash = res.getStringArray(R.array.ashtotra);
         tv.setText(ash[x]);
-        rsrcId=intent.getIntExtra("audioRsrcId",R.raw.mysong);
+        rsrcId=intent.getIntExtra("audioRsrcId", R.raw.ganesha_ashtottara_shatanamavali);
 
-
-        totdur=(TextView)findViewById(R.id.track_tot_dur);
+        totalDuration =(TextView)findViewById(R.id.track_tot_dur);
         title=(TextView)findViewById(R.id.track_name);
         title.setText(intent.getStringExtra("title"));
-
-
-
-
 
     }
 
@@ -136,9 +125,6 @@ public class StotraActivity extends AppCompatActivity {
     }
 
 
-
-
-
     public void playSong(View v)
     {
         if(mp!=null)
@@ -147,9 +133,6 @@ public class StotraActivity extends AppCompatActivity {
                 finalDur=mp.getDuration();
                 mp.seekTo(dur);
                 mp.start();
-
-
-
         }
         else
             {
@@ -157,7 +140,7 @@ public class StotraActivity extends AppCompatActivity {
                         mp = MediaPlayer.create(getApplicationContext(), rsrcId);
                         mp.start();
 
-                        totdur.setText(String.format("%02d:%d",
+                        totalDuration.setText(String.format("%02d:%d",
                                 TimeUnit.MILLISECONDS.toMinutes((long)mp.getDuration()),
                                 TimeUnit.MILLISECONDS.toSeconds((long)mp.getDuration()
                                 -TimeUnit.MILLISECONDS.toSeconds(
